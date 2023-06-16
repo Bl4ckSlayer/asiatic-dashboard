@@ -52,17 +52,17 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: (
-          <AdminRoute>
+          <PrivateRoute>
             <DashBoard></DashBoard>
-          </AdminRoute>
+          </PrivateRoute>
         ),
       },
       {
         path: "/dashboard/profile",
         element: (
-          <AdminRoute>
+          <PrivateRoute>
             <Profile></Profile>
-          </AdminRoute>
+          </PrivateRoute>
         ),
       },
 

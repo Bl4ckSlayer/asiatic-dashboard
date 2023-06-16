@@ -1,15 +1,17 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider";
+import { TicketContext } from "../../../context/TicketContext";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+
   const path = window.location.pathname;
   console.log(path);
   const handleLogOut = () => {
+    localStorage.removeItem("tickets");
+    localStorage.clear();
     logOut()
-      .then(() => {
-        localStorage.clear();
-      })
+      .then(() => {})
       .catch((err) => console.log(err));
   };
   const menuItems = (

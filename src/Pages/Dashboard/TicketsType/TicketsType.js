@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { TicketContext } from "../../../context/TicketContext";
 import UpdateModal from "./UpdateModal";
+import { toast } from "react-hot-toast";
 
 const TicketsType = () => {
   const { tickets, setTickets } = useContext(TicketContext);
@@ -9,6 +10,7 @@ const TicketsType = () => {
   const deleteTicket = (taskId) => {
     const updatedTicket = tickets.filter((task) => task.id !== taskId);
     setTickets(updatedTicket);
+    toast.success("Deleted");
   };
 
   const handleClick = () => {

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { TicketContext } from "../../../context/TicketContext";
+import { toast } from "react-hot-toast";
 
 const UpdateModal = ({ update, setUpdate }) => {
   const { tickets, setTickets } = useContext(TicketContext);
@@ -25,7 +26,7 @@ const UpdateModal = ({ update, setUpdate }) => {
   const handleForm = (data) => {
     const ticket = data.ticket;
     const description = data.description;
-    // console.log(objIndex, ticket, description);
+
     const updatedTickets = [...tickets];
     updatedTickets[objIndex].ticket = ticket;
     updatedTickets[objIndex].description = description;
@@ -33,6 +34,7 @@ const UpdateModal = ({ update, setUpdate }) => {
     setUpdate("");
     reset();
     setIsModalOpen(false);
+    toast.success("Ticket Type Updated Successfully");
   };
   const defaultTicketValue = tickets[objIndex]?.ticket || "";
   const defaultDescriptionValue = tickets[objIndex]?.description || "";
@@ -59,6 +61,9 @@ const UpdateModal = ({ update, setUpdate }) => {
               onSubmit={handleSubmit(handleForm)}
               className="grid grid-cols-1 gap-3 "
             >
+              <h1 className="text-xl font-bold text-blue-800 underline">
+                Edit Ticket Type
+              </h1>
               <div className="grid  grid-cols-12 ">
                 <div className="col-span-4 ">
                   <label className="label font-bold">
@@ -77,7 +82,7 @@ const UpdateModal = ({ update, setUpdate }) => {
                       })}
                       type="text"
                       defaultValue={defaultTicketValue}
-                      className="input input-bordered w-11/12 input-primary "
+                      className="input input-bordered w-11/12 input-secondary "
                       autoFocus
                     />
                     {errors.ticket && (
@@ -104,7 +109,7 @@ const UpdateModal = ({ update, setUpdate }) => {
                   {...register("description", {})}
                   type="text"
                   defaultValue={defaultDescriptionValue}
-                  className="textarea col-span-8 w-11/12 textarea-info"
+                  className="textarea col-span-8 w-11/12 textarea-secondary"
                 />
               </div>
 
@@ -112,7 +117,7 @@ const UpdateModal = ({ update, setUpdate }) => {
               <div className="flex justify-end gap-4">
                 <label
                   htmlFor="my_modal_6"
-                  className="btn bg-red-300 text-white hover:bg-red-700 "
+                  className="btn bg-error hover:bg-red-700 text-white  "
                 >
                   Close
                 </label>

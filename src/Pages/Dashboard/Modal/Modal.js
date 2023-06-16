@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import TicketsType from "../TicketsType/TicketsType";
 import { TicketContext } from "../../../context/TicketContext";
+import { toast } from "react-hot-toast";
 
 const Modal = () => {
   const {
@@ -27,6 +28,7 @@ const Modal = () => {
 
     reset();
     setIsModalOpen(false);
+    toast.success("Ticket Type Added Successfully");
   };
 
   return (
@@ -61,7 +63,9 @@ const Modal = () => {
               onSubmit={handleSubmit(handleForm)}
               className="grid grid-cols-1 gap-3 "
             >
-              <h1>Add Ticket</h1>
+              <h1 className="text-xl font-bold text-blue-800 underline">
+                Add Ticket Type
+              </h1>
               <div className="grid  grid-cols-12 ">
                 <div className="col-span-4 ">
                   <label className="label font-bold">
@@ -80,7 +84,7 @@ const Modal = () => {
                       })}
                       type="text"
                       placeholder="Ticket Type"
-                      className="input input-bordered w-11/12 input-primary "
+                      className="input input-bordered w-11/12 input-secondary "
                       autoFocus
                     />
                     {errors.ticket && (
@@ -108,7 +112,7 @@ const Modal = () => {
                   {...register("description", {})}
                   type="text"
                   placeholder="Description"
-                  className="textarea col-span-8 w-11/12 textarea-info"
+                  className="textarea col-span-8 w-11/12 textarea-secondary"
                 />
               </div>
 
@@ -116,7 +120,7 @@ const Modal = () => {
               <div className="flex justify-end gap-4">
                 <label
                   htmlFor="booking-modal"
-                  className="btn bg-red-300 text-white hover:bg-red-700 "
+                  className="btn bg-error hover:bg-red-700 text-white  "
                 >
                   Close
                 </label>

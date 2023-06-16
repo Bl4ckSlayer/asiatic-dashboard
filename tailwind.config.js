@@ -6,10 +6,11 @@ module.exports = {
       {
         mtheme: {
           primary: "#0FCFEC",
-          secondary: "#19D3AE",
+          secondary: "#1d4ed8",
           accent: "#3A4256",
           neutral: "#3D4451",
           "base-100": "#FFFFFF",
+          error: "#dc2626",
         },
       },
     ],
