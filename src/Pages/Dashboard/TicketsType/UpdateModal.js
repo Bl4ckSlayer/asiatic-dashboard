@@ -1,49 +1,47 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import TicketsType from "../TicketsType/TicketsType";
 import { TicketContext } from "../../../context/TicketContext";
 
-const Modal = () => {
+const UpdateModal = ({ update, setUpdate }) => {
+  const { tickets, setTickets } = useContext(TicketContext);
+  const objIndex = tickets.findIndex((obj) => obj.id === update);
+  console.log(objIndex);
   const {
     register,
     formState: { errors },
     handleSubmit,
-
     reset,
   } = useForm();
+  useEffect(() => {
+    if (objIndex !== -1) {
+      reset({
+        ticket: tickets[objIndex]?.ticket || "",
+        description: tickets[objIndex]?.description || "",
+      });
+    }
+  }, [objIndex, reset, tickets]);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { tickets, setTickets } = useContext(TicketContext);
-
   const handleForm = (data) => {
-    const description = data.description;
     const ticket = data.ticket;
-
-    const newTask = {
-      id: Date.now(),
-      ticket: ticket,
-      description: description,
-    };
-    setTickets([...tickets, newTask]);
-
+    const description = data.description;
+    // console.log(objIndex, ticket, description);
+    const updatedTickets = [...tickets];
+    updatedTickets[objIndex].ticket = ticket;
+    updatedTickets[objIndex].description = description;
+    setTickets(updatedTickets);
+    setUpdate("");
     reset();
     setIsModalOpen(false);
   };
-
+  const defaultTicketValue = tickets[objIndex]?.ticket || "";
+  const defaultDescriptionValue = tickets[objIndex]?.description || "";
   return (
     <div>
-      <div className="text-end">
-        <label
-          htmlFor="booking-modal"
-          className="btn bg-blue-800 border mb-6 font-extrabold hover:bg-slate-600 mt-4 text-white"
-        >
-          Add Ticket Type
-        </label>
-      </div>
-
       <div>
         <input
           type="checkbox"
-          id="booking-modal"
+          id="my_modal_6"
           className="modal-toggle"
           checked={isModalOpen}
           onChange={() => setIsModalOpen(!isModalOpen)}
@@ -51,7 +49,7 @@ const Modal = () => {
         <div className="modal">
           <div className="modal-box relative">
             <label
-              htmlFor="booking-modal"
+              htmlFor="my_modal_6"
               className="btn btn-sm btn-circle absolute right-2 top-2"
             >
               ✕
@@ -61,7 +59,6 @@ const Modal = () => {
               onSubmit={handleSubmit(handleForm)}
               className="grid grid-cols-1 gap-3 "
             >
-              <h1>Add Ticket</h1>
               <div className="grid  grid-cols-12 ">
                 <div className="col-span-4 ">
                   <label className="label font-bold">
@@ -79,7 +76,7 @@ const Modal = () => {
                         required: "This field is required",
                       })}
                       type="text"
-                      placeholder="Ticket Type"
+                      defaultValue={defaultTicketValue}
                       className="input input-bordered w-11/12 input-primary "
                       autoFocus
                     />
@@ -102,12 +99,11 @@ const Modal = () => {
                       {errors.description?.message}
                     </span>
                   )}
-                </div>
-
+                </div>{" "}
                 <textarea
                   {...register("description", {})}
                   type="text"
-                  placeholder="Description"
+                  defaultValue={defaultDescriptionValue}
                   className="textarea col-span-8 w-11/12 textarea-info"
                 />
               </div>
@@ -115,7 +111,7 @@ const Modal = () => {
               <br />
               <div className="flex justify-end gap-4">
                 <label
-                  htmlFor="booking-modal"
+                  htmlFor="my_modal_6"
                   className="btn bg-red-300 text-white hover:bg-red-700 "
                 >
                   Close
@@ -124,17 +120,15 @@ const Modal = () => {
                 <input
                   className="btn bg-blue-800 text-white hover:bg-green-700"
                   type="submit"
-                  value="Add Ticket Type"
+                  value="Save Changes"
                 />
               </div>
             </form>
           </div>
         </div>
       </div>
-
-      <TicketsType></TicketsType>
     </div>
   );
 };
 
-export default Modal;
+export default UpdateModal;

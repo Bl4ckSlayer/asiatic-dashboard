@@ -21,18 +21,6 @@ const Profile = () => {
           <h2 className="card-title">
             Account Created : {user?.metadata?.creationTime}
           </h2>
-
-          {/* <div className="card-actions justify-end">
-            <label
-              for="booking-modal"
-              onClick={() => {
-                setTreatment(myUsers[0]);
-              }}
-              className="btn modal-button btn-secondary text-white text-center"
-            >
-              Update Profile
-            </label>
-          </div> */}
         </div>
       </div>
     </div>

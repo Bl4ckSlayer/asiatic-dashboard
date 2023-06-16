@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { TicketContext } from "../../../context/TicketContext";
+import UpdateModal from "./UpdateModal";
 
-const TicketsType = ({ tickets, deleteTicket, setUpdate }) => {
+const TicketsType = () => {
+  const { tickets, setTickets } = useContext(TicketContext);
+  const [update, setUpdate] = useState("");
+
+  const deleteTicket = (taskId) => {
+    const updatedTicket = tickets.filter((task) => task.id !== taskId);
+    setTickets(updatedTicket);
+  };
+
   const handleClick = () => {
     const elem = document.activeElement;
     if (elem) {
       elem?.blur();
     }
   };
+
   return (
     <div>
       <table className="table table-compact w-full">
@@ -77,21 +88,21 @@ const TicketsType = ({ tickets, deleteTicket, setUpdate }) => {
                           onClick={handleClick}
                           className="btn mr-1 btn-xs"
                         >
-                          Cancel
+                          No
                         </button>
 
                         <button
                           className="btn btn-xs btn-error"
                           onClick={() => deleteTicket(task.id)}
                         >
-                          Confirm
+                          Yes
                         </button>
                       </div>
                     </div>
                   </div>
                 </div>
                 <label
-                  htmlFor="booking-modal"
+                  htmlFor="my_modal_6"
                   className="btn btn-xs ml-0  sm:ml-2"
                   onClick={() => setUpdate(task.id)}
                 >
@@ -123,6 +134,7 @@ const TicketsType = ({ tickets, deleteTicket, setUpdate }) => {
           </tr>
         </tfoot>
       </table>
+      <UpdateModal update={update} setUpdate={setUpdate}></UpdateModal>
     </div>
   );
 };

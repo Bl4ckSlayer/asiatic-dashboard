@@ -8,8 +8,7 @@ const Navbar = () => {
   const handleLogOut = () => {
     logOut()
       .then(() => {
-        localStorage.removeItem("tickets");
-        localStorage.removeItem("accessToken");
+        localStorage.clear();
       })
       .catch((err) => console.log(err));
   };

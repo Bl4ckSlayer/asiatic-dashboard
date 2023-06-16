@@ -11,12 +11,6 @@ const firebaseConfig = {
   storageBucket: process.env.REACT_APP_storageBucket,
   messagingSenderId: process.env.REACT_APP_messagingSenderId,
   appId: process.env.REACT_APP_appId,
-  // apiKey: "AIzaSyCW9Zr-gteglOQYOWDdOOJTXYVfSx7ka8E",
-  // authDomain: "asiatic-dashboard.firebaseapp.com",
-  // projectId: "asiatic-dashboard",
-  // storageBucket: "asiatic-dashboard.appspot.com",
-  // messagingSenderId: "27586215846",
-  // appId: "1:27586215846:web:c46840e56651bb57035967",
 };
 
 // Initialize Firebase

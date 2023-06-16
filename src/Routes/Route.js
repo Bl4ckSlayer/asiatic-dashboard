@@ -42,6 +42,14 @@ const router = createBrowserRouter([
     ),
     children: [
       {
+        path: "/dashboard/type",
+        element: (
+          <AdminRoute>
+            <Modal></Modal>
+          </AdminRoute>
+        ),
+      },
+      {
         path: "/dashboard",
         element: (
           <AdminRoute>
@@ -63,14 +71,6 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <Assets></Assets>
-          </AdminRoute>
-        ),
-      },
-      {
-        path: "/dashboard/type",
-        element: (
-          <AdminRoute>
-            <Modal></Modal>
           </AdminRoute>
         ),
       },

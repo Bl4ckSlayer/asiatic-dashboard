@@ -5,7 +5,7 @@ const useAdmin = (email) => {
   console.log(email);
   const [isAdminLoading, setIsAdminLoading] = useState(true);
   useEffect(() => {
-    if (email == "admin@admin.com") {
+    if (email === "admin@admin.com") {
       setIsAdmin(true);
       setIsAdminLoading(false);
     }
